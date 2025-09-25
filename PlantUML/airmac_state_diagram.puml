@@ -1,0 +1,51 @@
+
+@startuml
+title AIR MAC SMART - State Diagram (Web-only UI controlling device)
+
+[*] --> Init
+
+state Init {
+  Init : Load app
+  Init : Check connectivity
+}
+
+Init --> Intake : Open New Case
+state Intake as "Patient Intake" {
+  Intake : Required demographics (name, dob, age auto, gender, address, phone, email, chief complaint)
+  Intake : Validate fields
+}
+Intake --> Clinical : [validDemographics]
+
+state Clinical as "Clinical Checklist" {
+  Clinical : 11-item checklist (+/-)
+  Clinical : Ultrasound position (R of navel / Supra-umb / L of navel / Not seen)
+  Clinical : Compute risk score & tier
+}
+Clinical --> Ready : [checklistComplete && riskComputed]
+
+state Ready as "Ready (not pumping)" {
+  Ready : Show recommended LPM/pressure limits
+  Ready : Await user confirmation
+}
+Ready --> Pumping : Start()
+
+state Pumping {
+  Pumping : Stream pressure @10Hz
+  Pumping : Auto reduce LPM if threshold exceeded
+  Pumping : Log time-series
+}
+Pumping --> AlertPause : [thresholdExceeded && sustained]
+AlertPause : Alarm + Suggest Pause/Stop
+AlertPause --> Pumping : Resume()
+AlertPause --> End : Stop()
+
+Pumping --> End : Complete()
+Ready --> End : Cancel()
+
+state End {
+  End : Save logs
+  End : Export PDF/CSV (optional)
+  End : Reset UI
+}
+
+@enduml

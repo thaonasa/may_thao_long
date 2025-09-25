@@ -1,0 +1,42 @@
+
+@startuml
+title AIR MAC SMART - Web UI / Server / Device Sequence
+
+actor User as U
+participant "Web UI" as UI
+participant "Server API" as API
+participant "DeviceCtl (embedded)" as DEV
+participant "PressureSensor" as PS
+
+U -> UI : Open app → New Case
+UI -> API : POST /cases {demographics}
+API -> UI : 201 {caseId}
+U -> UI : Fill clinical checklist (11 items) + US position
+UI -> API : POST /cases/{id}/score {checklist,us}
+API -> API : Compute risk tier → map LPM/pressure
+API -> UI : 200 {riskTier, recommendedLPM, pressureCap}
+
+U -> UI : Confirm Start
+UI -> API : POST /cases/{id}/start
+API -> DEV : start(caseId, LPM, pressureCap)
+
+loop Stream @10Hz
+  PS -> DEV : pressure()
+  DEV -> API : event {pressure, lpm, t}
+  API -> UI : SSE/WebSocket {pressure, lpm, alerts}
+end
+
+alt Threshold exceeded
+  DEV -> DEV : reduce LPM
+  DEV -> API : event {alert: THRESHOLD_EXCEEDED}
+  API -> UI : push alert (audible/visual)
+else E-Stop
+  U -> UI : Click E-Stop
+  UI -> API : POST /cases/{id}/estop
+  API -> DEV : stop() & vent()
+end
+
+U -> UI : Stop & Save
+UI -> API : POST /cases/{id}/complete
+API -> UI : 200 {reportLink}
+@enduml

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800">
+<rect x="0" y="0" width="1280" height="64" fill="#F4F6F8"/>
+<text x="24" y="40" font-size="24" font-family="Inter, Arial" fill="#111">Màn hình 1: Nhập thông tin bệnh nhân (Bắt buộc)</text>
+<rect x="40" y="96" width="560" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="124" font-size="16" font-family="Inter, Arial" fill="#333">Họ tên *</text>
+<rect x="680" y="96" width="240" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="692" y="124" font-size="16" font-family="Inter, Arial" fill="#333">Ngày sinh * (DatePicker)</text>
+<rect x="940" y="96" width="240" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="952" y="124" font-size="16" font-family="Inter, Arial" fill="#333">Tuổi (auto)</text>
+<rect x="40" y="196" width="220" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="224" font-size="16" font-family="Inter, Arial" fill="#333">Giới tính * (Nam/Nữ)</text>
+<rect x="280" y="196" width="380" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="292" y="224" font-size="16" font-family="Inter, Arial" fill="#333">Số điện thoại * (+84)</text>
+<rect x="680" y="196" width="500" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="692" y="224" font-size="16" font-family="Inter, Arial" fill="#333">Email</text>
+<rect x="40" y="296" width="1140" height="80" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="324" font-size="16" font-family="Inter, Arial" fill="#333">Địa chỉ *</text>
+<rect x="40" y="396" width="560" height="100" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="424" font-size="16" font-family="Inter, Arial" fill="#333">Lý do nhập viện/Tình trạng *</text>
+<rect x="620" y="396" width="560" height="100" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="632" y="424" font-size="16" font-family="Inter, Arial" fill="#333">Mã bệnh án (nếu có)</text>
+<rect x="40" y="516" width="300" height="64" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="544" font-size="16" font-family="Inter, Arial" fill="#333">[Hủy]</text>
+<rect x="880" y="516" width="300" height="64" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="892" y="544" font-size="16" font-family="Inter, Arial" fill="#333">[Tiếp tục → Lâm sàng]</text>
+<text x="24" y="780" font-size="14" font-family="Inter, Arial" fill="#666">Grid: 12-col / 80px gutter; Tap targets ≥40px; Primary breakpoint 1280×800</text>
+</svg>

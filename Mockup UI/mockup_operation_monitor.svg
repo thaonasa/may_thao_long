@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800">
+<rect x="0" y="0" width="1280" height="64" fill="#F4F6F8"/>
+<text x="24" y="40" font-size="24" font-family="Inter, Arial" fill="#111">Màn hình 3: Vận hành & Cảnh báo</text>
+<rect x="40" y="96" width="380" height="120" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="124" font-size="16" font-family="Inter, Arial" fill="#333">LPM hiện tại / Khuyến nghị</text>
+<rect x="440" y="96" width="380" height="120" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="452" y="124" font-size="16" font-family="Inter, Arial" fill="#333">Áp lực hiện tại / Cực đại</text>
+<rect x="840" y="96" width="340" height="120" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="852" y="124" font-size="16" font-family="Inter, Arial" fill="#333">Trạng thái: Sẵn sàng/Đang bơm/Tạm dừng</text>
+<rect x="40" y="236" width="1140" height="260" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="264" font-size="16" font-family="Inter, Arial" fill="#333">Biểu đồ áp lực theo thời gian (10Hz)</text>
+<rect x="40" y="516" width="360" height="64" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="544" font-size="16" font-family="Inter, Arial" fill="#333">[Bắt đầu/Tạm dừng]</text>
+<rect x="420" y="516" width="360" height="64" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="432" y="544" font-size="16" font-family="Inter, Arial" fill="#333">[E-Stop]</text>
+<rect x="800" y="516" width="380" height="64" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="812" y="544" font-size="16" font-family="Inter, Arial" fill="#333">[Kết thúc & Lưu]</text>
+<rect x="40" y="600" width="1140" height="160" rx="12" ry="12" fill="none" stroke="#888" stroke-dasharray="6,4"/>
+<text x="52" y="628" font-size="16" font-family="Inter, Arial" fill="#333">Log sự kiện & Cảnh báo (mức 1–3)</text>
+<text x="24" y="780" font-size="14" font-family="Inter, Arial" fill="#666">Grid: 12-col / 80px gutter; Tap targets ≥40px; Primary breakpoint 1280×800</text>
+</svg>
