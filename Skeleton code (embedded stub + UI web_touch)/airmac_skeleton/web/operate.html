@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="vi">
 <head>
@@ -8,48 +7,72 @@
   <link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
-  <main class="container">
-    <h1>3) Vận hành & Cảnh báo</h1>
+  <main class="container form-card">
+    <h1>3. Vận hành & Cảnh báo</h1>
+
+    <!-- KPI Section -->
     <div class="kpi">
-      <div class="card"><div>LPM</div><div id="lpm" style="font-size:24px">0</div></div>
-      <div class="card"><div>Áp lực (mmHg)</div><div id="pressure" style="font-size:24px">0</div></div>
-      <div class="card"><div>Trạng thái</div><div id="status" style="font-size:24px">-</div></div>
+      <div class="card kpi-card">
+        <div class="label">LPM</div>
+        <div id="lpm" class="value">0</div>
+      </div>
+      <div class="card kpi-card">
+        <div class="label">Áp lực (mmHg)</div>
+        <div id="pressure" class="value">0</div>
+      </div>
+      <div class="card kpi-card">
+        <div class="label">Trạng thái</div>
+        <div id="status" class="value badge">-</div>
+      </div>
     </div>
+
+    <!-- Actions -->
     <div class="actions">
-      <button id="start" class="primary">Bắt đầu</button>
-      <button id="estop" class="secondary">E-Stop</button>
-      <button id="stop" class="secondary">Kết thúc & Lưu</button>
+      <button id="start" class="btn primary">▶ Bắt đầu</button>
+      <button id="estop" class="btn danger">⛔ E-Stop</button>
+      <button id="stop" class="btn secondary">⏹ Kết thúc & Lưu</button>
     </div>
+
     <div id="msg" class="alert" style="display:none"></div>
   </main>
+
 <script>
-const api = (p, o={}) => fetch('http://localhost:8080'+p, {headers:{'Content-Type':'application/json'}, ...o}).then(r=>r.json());
+const api = (p, o={}) => fetch('http://localhost:8080'+p, {
+  headers:{'Content-Type':'application/json'}, ...o
+}).then(r=>r.json());
+
 const caseId = localStorage.getItem('caseId');
-const el = { lpm: document.getElementById('lpm'), pressure: document.getElementById('pressure'), status: document.getElementById('status'), msg: document.getElementById('msg') };
+const el = {
+  lpm: document.getElementById('lpm'),
+  pressure: document.getElementById('pressure'),
+  status: document.getElementById('status'),
+  msg: document.getElementById('msg')
+};
 
 async function refresh() {
   try {
     const r = await api(`/api/cases/${caseId}/status`);
     if (r.status) {
       el.status.textContent = r.status;
+      el.status.className = "value badge " + r.status;
       el.lpm.textContent = r.device?.lpm?.toFixed(2) ?? '0';
       el.pressure.textContent = r.device?.pressure?.toFixed(1) ?? '0';
     }
   } catch {}
 }
-setInterval(refresh, 500);
+setInterval(refresh, 1000);
 
 document.getElementById('start').onclick = async ()=>{
   const r = await api(`/api/cases/${caseId}/start`, { method:'POST' });
-  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = 'Đã bắt đầu bơm.'; }
+  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = '✅ Đã bắt đầu bơm.'; }
 };
 document.getElementById('estop').onclick = async ()=>{
   const r = await api(`/api/cases/${caseId}/estop`, { method:'POST' });
-  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = 'Đã E-Stop & xả áp.'; }
+  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = '⛔ Đã E-Stop & xả áp.'; }
 };
 document.getElementById('stop').onclick = async ()=>{
   const r = await api(`/api/cases/${caseId}/complete`, { method:'POST' });
-  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = 'Đã lưu ca. Bạn có thể xuất báo cáo từ server.'; }
+  if (r.ok) { el.msg.style.display='block'; el.msg.textContent = '📁 Đã lưu ca. Có thể xuất báo cáo từ server.'; }
 };
 </script>
 </body>

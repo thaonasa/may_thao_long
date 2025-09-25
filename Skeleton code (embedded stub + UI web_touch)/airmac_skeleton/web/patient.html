@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="vi">
 <head>
@@ -8,30 +7,59 @@
   <link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
-  <main class="container">
-    <h1>1) Thông tin bệnh nhân</h1>
+  <main class="container form-card">
+    <h1>1. Thông tin bệnh nhân</h1>
     <form id="f">
       <div class="form-grid">
-        <div><label>Họ tên *</label><input name="fullName" required/></div>
-        <div><label>Ngày sinh *</label><input type="date" name="dob" required/></div>
-        <div><label>Giới tính *</label>
-          <select name="gender" required><option value="">--</option><option>Nam</option><option>Nữ</option></select>
+        <div class="form-group">
+          <label>Họ tên *</label>
+          <input name="fullName" required/>
         </div>
-        <div><label>Số điện thoại *</label><input name="phone" pattern="\d{10}" required/></div>
-        <div><label>Email</label><input type="email" name="email"/></div>
-        <div><label>Mã bệnh án</label><input name="mrn"/></div>
-        <div style="grid-column:span 2"><label>Địa chỉ *</label><input name="address" required/></div>
-        <div style="grid-column:span 2"><label>Lý do nhập viện / Tình trạng *</label><textarea name="chiefComplaint" rows="3" required></textarea></div>
+        <div class="form-group">
+          <label>Ngày sinh *</label>
+          <input type="date" name="dob" required/>
+        </div>
+        <div class="form-group">
+          <label>Giới tính *</label>
+          <select name="gender" required>
+            <option value="">-- Chọn --</option>
+            <option>Nam</option>
+            <option>Nữ</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại *</label>
+          <input name="phone" pattern="\d{10}" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email"/>
+        </div>
+        <div class="form-group">
+          <label>Mã bệnh án</label>
+          <input name="mrn"/>
+        </div>
+        <div class="form-group full">
+          <label>Địa chỉ *</label>
+          <input name="address" required/>
+        </div>
+        <div class="form-group full">
+          <label>Lý do nhập viện / Tình trạng *</label>
+          <textarea name="chiefComplaint" rows="3" required></textarea>
+        </div>
       </div>
       <div class="actions">
-        <a class="secondary" href="./index.html">← Trang chủ</a>
-        <button class="primary" type="submit">Tiếp tục → Lâm sàng</button>
+        <a class="btn secondary" href="./index.html">← Trang chủ</a>
+        <button class="btn primary" type="submit">Tiếp tục → Lâm sàng</button>
       </div>
     </form>
     <div id="msg" class="alert" style="display:none"></div>
   </main>
 <script>
-const api = (p, o={}) => fetch('http://localhost:8080'+p, {headers:{'Content-Type':'application/json'}, ...o}).then(r=>r.json());
+const api = (p, o={}) => fetch('http://localhost:8080'+p, {
+  headers:{'Content-Type':'application/json'}, ...o
+}).then(r=>r.json());
+
 document.getElementById('f').addEventListener('submit', async (e)=>{
   e.preventDefault();
   const fd = new FormData(e.target);
@@ -41,11 +69,11 @@ document.getElementById('f').addEventListener('submit', async (e)=>{
     if (r.caseId) {
       localStorage.setItem('caseId', r.caseId);
       location.href = './clinical.html';
-    } else {
-      throw new Error(r.error||'Lỗi');
-    }
+    } else throw new Error(r.error||'Lỗi');
   } catch (err) {
-    const m = document.getElementById('msg'); m.style.display='block'; m.textContent = 'Không tạo được ca: '+err.message;
+    const m = document.getElementById('msg');
+    m.style.display='block';
+    m.textContent = 'Không tạo được ca: '+err.message;
   }
 });
 </script>
